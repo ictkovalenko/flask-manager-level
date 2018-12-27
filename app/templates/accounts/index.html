@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+{% block title %}Users{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href = "{{ url_for('static', filename='css/accounts.css') }}?ver={{ context['app_version'] }}">
+{% endblock %}
+{% block navbar_menu %}
+<ul class="nav navbar-nav">
+    <li><a href="{{ url_for('performers.index') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Players</a></li>
+    <li><a href="{{ url_for('party.index') }}"><span class="glyphicon glyphicon-music" aria-hidden="true"></span> Party</a></li>
+    <li><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> living</a></li>
+    <li><a href="#"><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span> eating</a></li>
+    <li><a href="#"><span class="glyphicon glyphicon-plane" aria-hidden="true"></span> postal</a></li>
+    <li class="active dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Settings <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="#">Users</a></li>
+            <li><a href="#">Hostels</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">VAR</a></li>
+        </ul>
+    </li>
+</ul>
+{% endblock %}
+{% block page_content %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <a class="btn btn-primary btn-block" href="{{ url_for('accounts.newuser') }}" role="button">User(create)</a>
+        </div>
+    </div>
+</div>
+{% include 'accounts/_users.html' %}
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/accounts/index.js') }}?ver={{ context['app_version'] }}"></script>
+{% endblock %}

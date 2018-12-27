@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Profile{% endblock %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href = "{{ url_for('static', filename='css/accounts.css') }}?ver={{ context['app_version'] }}">
+{% endblock %}
+{% block navbar_menu %}
+<ul class="nav navbar-nav">
+    <li><a href="{{ url_for('.index') }}">&lt;&lt; back</a></li>
+</ul>
+{% endblock %}
+{% block page_content %}
+<div class="container">
+    {{ wtf.quick_form(context['form']) }}
+    <span class="label label-info">role</span>
+    <span class="help-block" id="role-description"></span>
+    <div class="row">
+        <div class="col-sm-2">
+            {% if context['form'].edit %}
+            <button type="button" class="btn btn-danger btn-block" id="deleteuser">delete</button>
+            {% endif %}
+        </div>
+        <div class="col-sm-2">
+            {% if context['form'].edit %}
+            <button type="button" class="btn btn-warning btn-block" id="resetpassword">password reset</button>
+            {% endif %}
+        </div>
+        <div class="col-sm-2 col-sm-offset-6">
+            {% if context['form'].edit %}
+            <button type="button" class="btn btn-primary btn-block" id="saveuser">save</button>
+            {% else %}
+            <button type="button" class="btn btn-primary btn-block" id="newuser">create</button>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="bottommarger"></div>
+{% if context['form'].edit %}
+<form id="form_deleteuser" action="{{ url_for('accounts.deleteuser') }}" method="post">
+    <input type="hidden" name="login" value="{{ context['form'].login.data }}"/>
+</form>
+<form id="form_resetpassword" action="{{ url_for('accounts.resetpassword') }}" method="post">
+    <input type="hidden" name="login" value="{{ context['form'].login.data }}"/>
+</form>
+{% endif %}
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+{% if context['form'].edit %}
+<script src="{{ url_for('static', filename='js/accounts/profile_edit.js') }}?ver={{ context['app_version'] }}"></script>
+{% else %}
+<script src="{{ url_for('static', filename='js/accounts/profile_new.js') }}?ver={{ context['app_version'] }}"></script>
+{% endif %}
+{% endblock %}

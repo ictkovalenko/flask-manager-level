@@ -1,0 +1,36 @@
+<div class="container">
+    {% if context['users'] %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-sm_2">name</th>
+                <th class="col-sm-2">location</th>
+                <th class="col-sm-3">org</th>
+                <th class="col-sm-3">contacts</th>
+                <th class="col-sm-2">role</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in context['users'] %}
+            <tr class="user edituser" id="{{ user.id }}">
+                <td>{{ user.name_first }} {% if user.name_last %}{{ user.name_last }}{% endif %}</td>
+                <td>{% if user.city %}{{ user.city }}{% endif %}</td>
+                <td>{% if user.company %}{{ user.company }}{% endif %}</td>
+                <td>{% if user.contacts %}{{ user.contacts }}{% endif %}</td>
+                <td>
+                    {{ macros.role_image(user) }}
+                    {{ user.role_name }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if context['pagination'] and context['users'] %}
+        <div class="pagination">
+            {{ macros.pagination_widget(context['pagination'], '.index') }}
+        </div>
+    {% endif %}
+    {% else %}
+    <div class="emptylist">Empty list</div>
+    {% endif %}
+</div>

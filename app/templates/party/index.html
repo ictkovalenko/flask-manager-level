@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}party{% endblock %}
+{% block navbar_menu %}
+<ul class="nav navbar-nav">
+    <li><a href="{{ url_for('performers.index') }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Players</a></li>
+    {% if current_user.is_user == False %}
+    <li class="active"><a href="#"><span class="glyphicon glyphicon-music" aria-hidden="true"></span> party</a></li>
+    <li><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> living</a></li>
+    <li><a href="#"><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span> eating</a></li>
+    <li><a href="#"><span class="glyphicon glyphicon-plane" aria-hidden="true"></span> delivery</a></li>
+    {% endif %}
+    {% if current_user.is_administrator %}
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Settings <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a href="{{ url_for('accounts.index') }}">Users</a></li>
+            <li><a href="#">hostels</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">VAR</a></li>
+        </ul>
+    </li>
+    {% endif %}
+</ul>
+{% endblock %}
+{% block page_content %}
+<div class="container">
+    {% if current_user.is_authenticated %}
+    <h1>Hi, {{ current_user.name_first }}</h1>
+    {% endif %}
+    <div class="text-center">
+        <h2>UNDER DEVELOPMENT</h2>
+        <img src="{{ url_for('static', filename='img/dump.png') }}?ver={{ context['app_version'] }}" alt="development">
+    </div>
+</div>
+{% endblock %}

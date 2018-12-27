@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}500 - SERVER ERROR{% endblock %}
+{% block page_content %}
+<div class="container">
+    <h1>500</h1>
+    <h2>SERVER ERROR!</h2>
+    {% if context['error'] %}
+    <p>{{ context['error'] }}</p>
+    {% endif %}
+</div>
+{% endblock %}

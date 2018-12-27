@@ -1,0 +1,64 @@
+.loginbox {
+    position: absolute;
+    text-align: center;
+    width: 512px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 16px;
+    border: 1px solid silver;
+    border-radius: 8px;
+    box-shadow: 4px 4px 6px rgba(0,0,0,0.5)
+}
+
+.loginbox-header {
+    display: block;
+    max-height: 80px;
+    margin-bottom: 16px;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.loginbox-header > img {
+    max-width: 512px;
+    width: 100%;
+}
+
+.loginbox-footer {
+    position: fixed;
+    display: block;
+    right: 16px;
+    bottom: 16px;
+    color: silver;
+}
+
+.bottommarger {
+    margin-top: 16px;
+}
+
+td > img {
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+
+tr.user {
+    cursor: pointer;
+}
+
+tr.user:hover {
+    background-color: #f0f0f0;
+}
+
+@media screen and (max-width: 512px) {
+    .loginbox {
+        width: 100%;
+    }
+}
+
+@media screen and (max-height: 416px) {
+    .loginbox-header {
+        display: none;
+    }
+}
